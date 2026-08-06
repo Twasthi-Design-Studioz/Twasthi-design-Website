@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaikunt — Villa Interiors | Twasthi Design Studioz</title>
+  <link rel="icon" href="../Img/monogram.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --green: #052F1B;
+      --green-soft: #0B4A2C;
+      --green-deep: #031F12;
+      --cream: #FDF5EA;
+      --white: #FFFFFF;
+      --grey: #C7CDC4;
+      --grey-dark: #6E7268;
+      --purple: #5B1487;
+      --purple-light: #9C6BC4;
+      --font-head: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', sans-serif;
+      --ease: cubic-bezier(.22, .61, .36, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 112.5%; }
+    body {
+      background: var(--cream);
+      color: var(--green);
+      font-family: var(--font-body);
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--purple); color: var(--cream); }
+    h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 400; letter-spacing: .01em; color: inherit; }
+
+    .eyebrow {
+      font-size: .82rem; letter-spacing: .26em; text-transform: uppercase;
+      font-weight: 600; color: var(--purple);
+    }
+    .eyebrow.on-green { color: var(--purple-light); }
+
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 6vw; }
+    section { padding: 110px 0; }
+
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Nav ---------- */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      padding: 22px 6vw; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(5,47,27,.94); backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    }
+    .brand-mark { display: flex; align-items: center; gap: 10px; }
+    .brand-mark img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+    .brand-name { font-family: var(--font-head); font-size: 1.1rem; color: var(--cream); }
+    nav ul { list-style: none; display: flex; gap: 2.4rem; }
+    nav a { color: var(--cream); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; position: relative; padding-bottom: 4px; }
+    nav a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--purple-light); transition: width .35s var(--ease); }
+    nav a:hover::after { width: 100%; }
+    .burger { display: none; width: 30px; height: 30px; overflow: hidden; cursor: pointer; }
+    .burger img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- Project Hero ---------- */
+    .proj-hero {
+      position: relative; height: 92vh; min-height: 560px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      color: var(--cream); overflow: hidden; background: var(--green);
+    }
+    .proj-hero img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .85;
+    }
+    .proj-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(5,47,27,.15) 0%, rgba(5,47,27,.25) 40%, rgba(5,47,27,.92) 100%);
+    }
+    .proj-hero-content { position: relative; z-index: 2; padding: 0 6vw 70px; }
+    .proj-hero-content .eyebrow { color: var(--purple-light); margin-bottom: 14px; display: block; }
+    .proj-hero-content h1 { font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 400; margin-bottom: 22px; }
+    .proj-hero-meta { display: flex; gap: 40px; flex-wrap: wrap; }
+    .proj-hero-meta div .label { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--grey); margin-bottom: 4px; }
+    .proj-hero-meta div .val { font-family: var(--font-head); font-size: 1.25rem; }
+
+    .back-link {
+      position: absolute; top: 100px; left: 6vw; z-index: 3;
+      font-size: .76rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--cream); display: inline-flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid rgba(253,245,234,.4); padding-bottom: 3px; transition: .3s var(--ease);
+    }
+    .back-link:hover { color: var(--purple-light); border-color: var(--purple-light); }
+
+    /* ---------- Story / Concept ---------- */
+    .story { background: var(--cream); }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; align-items: start; }
+    .story h2 { font-size: clamp(1.9rem, 3vw, 2.6rem); margin-bottom: 22px; line-height: 1.2; }
+    .story p { color: var(--grey-dark); line-height: 1.85; font-size: .97rem; margin-bottom: 18px; font-weight: 300; }
+
+    .materials { margin-top: 46px; }
+    .materials .eyebrow { display: block; margin-bottom: 18px; }
+    .material-list { display: flex; flex-wrap: wrap; gap: 12px; }
+    .material-list span {
+      border: 1px solid rgba(5,47,27,.2); color: var(--green);
+      font-size: .78rem; padding: 9px 18px; border-radius: 30px; letter-spacing: .02em;
+    }
+
+    /* ---------- Gallery ---------- */
+    .gallery { background: var(--green); color: var(--cream); }
+    .gallery .section-head { margin-bottom: 50px; }
+    .gallery .section-head h2 { font-size: clamp(2rem, 3.4vw, 2.9rem); }
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; grid-auto-rows: 220px;
+    }
+    .gallery-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: 2px; transition: transform .8s var(--ease); }
+    .gallery-grid a { overflow: hidden; display: block; border-radius: 2px; }
+    .gallery-grid a:hover img { transform: scale(1.06); }
+    .g1 { grid-column: span 4; grid-row: span 2; }
+    .g2 { grid-column: span 2; grid-row: span 1; }
+    .g3 { grid-column: span 2; grid-row: span 1; }
+    .g4 { grid-column: span 3; grid-row: span 1; }
+    .g5 { grid-column: span 3; grid-row: span 1; }
+    .g6 { grid-column: span 6; grid-row: span 2; }
+
+    /* ---------- Testimonial ---------- */
+    .testimonial { background: var(--white); text-align: center; }
+    .testimonial .wrap { max-width: 780px; }
+    .testimonial p.quote {
+      font-family: var(--font-head); font-style: italic; font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+      line-height: 1.5; color: var(--green); margin-bottom: 26px;
+    }
+    .testimonial .who { font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; color: var(--grey-dark); }
+
+    /* ---------- Next Project ---------- */
+    .next-proj {
+      background: var(--green-deep); color: var(--cream); position: relative; overflow: hidden;
+    }
+    .next-proj .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
+    .next-proj .eyebrow { color: var(--purple-light); display: block; margin-bottom: 10px; }
+    .next-proj h3 { font-size: clamp(1.8rem, 3vw, 2.6rem); }
+    .next-proj a.arrow {
+      width: 60px; height: 60px; border: 1px solid rgba(253,245,234,.3); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: .35s var(--ease);
+    }
+    .next-proj a.arrow:hover { border-color: var(--purple-light); background: var(--purple); }
+
+    /* ---------- Footer ---------- */
+    footer { background: var(--green-deep); color: var(--grey); padding: 60px 0 30px; border-top: 1px solid rgba(253,245,234,.1); }
+    .foot-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .foot-bottom p { font-size: .76rem; color: var(--grey-dark); }
+    footer .foot-brand { display: flex; align-items: center; gap: 10px; }
+    footer .foot-brand img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+    footer .foot-brand span { font-family: var(--font-head); color: var(--cream); font-size: 1.05rem; }
+
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .burger { display: block; }
+      .story-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; }
+      .g1, .g2, .g3, .g4, .g5, .g6 { grid-column: span 2; grid-row: span 1; }
+      .proj-hero-meta { gap: 24px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="siteHeader">
+    <a href="../index.html#home" class="brand-mark">
+      <img src="../Img/monogram.jpg" alt="Twasthi monogram">
+      <span class="brand-name">Twasthi</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#portfolio">Portfolio</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#blogs">Blogs</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="burger" id="burger"><img src="../Img/more.png" alt="Menu"></div>
+  </header>
+
+  <!-- PROJECT HERO -->
+  <section class="proj-hero">
+    <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+    <img src="../Img/Vaikunt_cbr.png" alt="Vaikunt villa — hero view">
+    <div class="proj-hero-content">
+      <span class="eyebrow">Villa Interiors</span>
+      <h1>Vaikunt</h1>
+      <div class="proj-hero-meta">
+        <div><span class="label">Location</span><span class="val">Hyderabad</span></div>
+        <!-- <div><span class="label">Year</span><span class="val">2026</span></div> -->
+        <div><span class="label">Scope</span><span class="val">Full Interior Design</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY + CONCEPT -->
+  <section class="story">
+    <div class="wrap story-grid">
+      <div class="reveal">
+        <p class="eyebrow">The Story</p>
+        <h2 style="margin-top:14px;">A home built around heritage and light</h2>
+        <p>At Vaikunt, every space is a quiet celebration of India's timeless craftsmanship. Rooted in tradition yet designed for contemporary living, the home seamlessly weaves together handcrafted woodwork, curated heirloom pieces, natural materials, and artisanal details to create interiors that feel warm, authentic, and enduring. From the welcoming entrance to the thoughtfully detailed bedrooms, living spaces, kitchen, and home office, every corner reflects a deep respect for heritage while embracing modern functionality.
+
+
+            Designed and executed by Twasthi Design Studioz, this residence is a testament to our philosophy that meaningful design is never about excess—it is about creating homes with soul, where every material, texture, and handcrafted element tells a story. Vaikunt is not merely a home; it is a timeless expression of culture, comfort, and craftsmanship, sculpted to be cherished for generations.</p>
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">Design Concept</p>
+        <h2 style="margin-top:14px;">Carved heritage, quiet luxury</h2>
+        <p>Vaikunt is a contemporary Indian home that celebrates heritage through thoughtful, timeless design. Inspired by traditional architecture and artisanal craftsmanship, the interiors seamlessly blend handcrafted elements with modern functionality. Rich teak wood, exposed brick, brass accents, natural stone, and curated Indian art create a warm, authentic palette that feels both elegant and enduring.
+
+Every space has been designed to tell a story—where carved furniture, handcrafted décor, and indigenous materials become an integral part of everyday living rather than mere embellishments. Natural light, earthy textures, and a restrained colour palette enhance the home's sense of calm, comfort, and belonging.
+
+The design reflects a philosophy of preserving cultural identity while embracing contemporary lifestyles. Rather than following fleeting trends, Vaikunt focuses on creating meaningful spaces that age gracefully and remain relevant for generations. The result is a home that is rooted in tradition, refined in expression, and thoughtfully crafted to embody warmth, functionality, and timeless Indian luxury.</p>
+        <div class="materials">
+          <span class="eyebrow">Materials Used</span>
+          <div class="material-list">
+            <span>Hand-carved Teak</span>
+            <span>Bottle Green Marble</span>
+            <span>Brass Inlay</span>
+            <span>Lime-washed Plaster</span>
+            <span>Handloom Textiles</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow on-green">Gallery</p>
+        <h2>Inside Vaikunt</h2>
+      </div>
+      <div class="gallery-grid">
+        <a class="g1" href="Img/Vaikunt_formal_living.png" target="_blank">
+          <img src="Img/Vaikunt_formal_living.png" alt="Vaikunt formal living room">
+        </a>
+        <a class="g2" href="Img/Vaikunt_cbr.png" target="_blank">
+          <img src="Img/Vaikunt_cbr.png" alt="Vaikunt carved detail">
+        </a>
+        <a class="g3" href="Img/Vaikunt_dining_table.png" target="_blank">
+          <img src="Img/Vaikunt_dining_table.png" alt="Vaikunt detail shot">
+        </a>
+        <a class="g4" href="Img/kitchen.png" target="_blank">
+          <img src="Img/kitchen.png" alt="Vaikunt bedroom">
+        </a>
+        <a class="g5" href="Img/twasthi.png" target="_blank">
+          <img src="Img/twasthi.png" alt="Vaikunt courtyard">
+        </a>
+        <a class="g6" href="Img/family living 2.png" target="_blank">
+          <img src="Img/family living 2.png" alt="Vaikunt dining area">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="testimonial">
+    <div class="wrap reveal">
+      <p class="quote">"Twasthi didn't just design our home — they understood what our family needed before
+        we could put it into words. Every corner feels intentional."</p>
+      <p class="who">— Client, Vaikunt Residence</p>
+    </div>
+  </section>
+
+  <!-- NEXT PROJECT -->
+  <section class="next-proj">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Next Project</span>
+        <h3>Madhuram — Apartment Interiors</h3>
+      </div>
+      <a href="madhuram.html" class="arrow">→</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-bottom">
+        <div class="foot-brand">
+          <img src="../Img/monogram.jpg" alt="Twasthi monogram">
+          <span>Twasthi Design Studioz</span>
+        </div>
+        <p>© 2026 Twasthi Design Studioz. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: .15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    document.getElementById('burger').addEventListener('click', () => {
+      const nav = document.querySelector('nav ul');
+      const opening = nav.style.display !== 'flex';
+      if (opening) {
+        nav.style.cssText = 'display:flex;position:fixed;top:66px;left:0;right:0;background:var(--green);flex-direction:column;align-items:center;padding:26px 0;gap:18px;';
+      } else {
+        nav.style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>
